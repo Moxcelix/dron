@@ -15,14 +15,17 @@ namespace Core.Dron
         public Propeller(float power, Vector3 liftPower, Vector3 sidePower)
         {
             _power = power;
-            _liftForce = liftPower;
-            _sideForce = sidePower;
+            _liftForce = liftPower.normalized;
+            _sideForce = sidePower.normalized;
         }
 
         public void Update()
         {
-            Force = RPM * _power * 
-                Vector3.Lerp(_liftForce, _sideForce, Range);
+            var range = Mathf.Clamp(Range, -1.0f, 1.0f);
+            var liftForce = _liftForce * Mathf.Sin(Mathf.Acos(range));
+            var sideForce = _sideForce * range;
+
+            Force = RPM * _power * (liftForce + sideForce);
         }
     }
 }
