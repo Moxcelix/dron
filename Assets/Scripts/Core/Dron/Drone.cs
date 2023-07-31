@@ -1,10 +1,10 @@
-namespace Core.Dron
+namespace Core.Drone
 {
-    public class Dron
+    public class Drone
     {
         public Propeller[] Propellers { get; }
 
-        public Dron(Propeller[] propellers)
+        public Drone(Propeller[] propellers)
         {
             Propellers = propellers;
         }

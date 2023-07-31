@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core.Dron
+namespace Core.Drone
 {
     public class PropellerBody : MonoBehaviour
     {
