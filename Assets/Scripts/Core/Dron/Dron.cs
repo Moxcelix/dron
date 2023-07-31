@@ -2,16 +2,16 @@ namespace Core.Dron
 {
     public class Dron
     {
-        private readonly Propeller[] _propellers;
+        public Propeller[] Propellers { get; }
 
         public Dron(Propeller[] propellers)
         {
-            _propellers = propellers;
+            Propellers = propellers;
         }
 
         public void Power(float range)
         {
-            foreach(var propeller in _propellers)
+            foreach(var propeller in Propellers)
             {
                 propeller.PowerRange = range;
             }
@@ -19,7 +19,7 @@ namespace Core.Dron
 
         public void Turn(float range)
         {
-            foreach (var propeller in _propellers)
+            foreach (var propeller in Propellers)
             {
                 propeller.TurnRange = range;
             }
@@ -27,7 +27,7 @@ namespace Core.Dron
 
         public void Update()
         {
-            foreach (var propeller in _propellers) 
+            foreach (var propeller in Propellers) 
             {
                 propeller.Update(); 
             }

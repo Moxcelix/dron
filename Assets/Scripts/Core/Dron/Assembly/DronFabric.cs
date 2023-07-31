@@ -2,8 +2,11 @@ using UnityEngine;
 
 namespace Core.Dron
 {
+    [System.Serializable]
     public class DronFabric
     {
+        [SerializeField] private DronBody _dronBodyPrefab;
+
         public Dron CreateDron(float power)
         {
             var propellers = new Propeller[]
@@ -16,6 +19,16 @@ namespace Core.Dron
             var dron = new Dron(propellers);
 
             return dron;
+        }
+
+        public DronBody CreateDron(float power, Vector3 position)
+        {
+            var dronBody = Object.Instantiate(_dronBodyPrefab, position, Quaternion.identity);
+            var dron = CreateDron(power);
+
+            ApplyDronBody(dron, dronBody);
+
+            return dronBody;
         }
 
         public void ApplyDronBody(Dron dron, DronBody body)

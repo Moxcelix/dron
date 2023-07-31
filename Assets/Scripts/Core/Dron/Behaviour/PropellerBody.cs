@@ -16,9 +16,14 @@ namespace Core.Dron
 
         private void FixedUpdate()
         {
+            if(_propeller == null)
+            {
+                return;
+            }
+
             var velocity = Time.fixedDeltaTime * _propeller.Force.magnitude * _speed;
 
-            transform.localEulerAngles += Vector3.up * velocity;
+            _blades.localEulerAngles += Vector3.forward * velocity;
         }
     }
 }
