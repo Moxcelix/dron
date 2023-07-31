@@ -16,7 +16,7 @@ namespace Core.Dron
 
         private void FixedUpdate()
         {
-            var velocity = Time.fixedDeltaTime * _propeller.Force * _speed;
+            var velocity = Time.fixedDeltaTime * _propeller.Force.magnitude * _speed;
 
             transform.localEulerAngles += Vector3.up * velocity;
         }
