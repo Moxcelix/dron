@@ -6,7 +6,7 @@ namespace Core.Dron
     {
         private Dron _dron;
 
-        public void Initialize(Dron dron)
+        public void Apply(Dron dron)
         {
             _dron = dron;
         }
