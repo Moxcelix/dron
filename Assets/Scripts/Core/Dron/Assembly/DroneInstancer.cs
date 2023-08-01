@@ -7,7 +7,7 @@ namespace Core.Drone
     {
         [SerializeField] private DroneBody _dronBodyPrefab;
 
-        public DroneBody Instance(Drone drone, Vector3 position)
+        public DroneBody Instantiate(Drone drone, Vector3 position)
         {
             var droneBody = Object.Instantiate(_dronBodyPrefab, position, Quaternion.identity);
 

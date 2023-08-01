@@ -20,9 +20,9 @@ public class Bootstrap : MonoBehaviour
         _playerController.IsAvailable = true;
 
         // Test.
-        var drone = _droneFabric.CreateDron(1.0f);
-        var droneBody = _droneInstancer.Instance(drone, new Vector3(0, 1, 0));
-        drone.Power(10.0f);
+        var drone = _droneFabric.CreateDron(140f);
+        var droneBody = _droneInstancer.Instantiate(drone, new Vector3(0, 1, 0));
+        drone.Power(1.0f);
     }
 
     private void Update()

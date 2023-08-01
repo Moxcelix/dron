@@ -352,11 +352,11 @@ MonoBehaviour:
     _jumpKey: 32
     _runKey: 306
     _leaveKey: 304
-    _mouseSensitivity: 10
+    _mouseSensitivity: 5
     _pauseKey: 27
     _interactKey: 101
   _playerBody: {fileID: 1295742063}
-  _dronFabric:
+  _droneInstancer:
     _dronBodyPrefab: {fileID: 7267657682009207381, guid: 55cbf1b36fa656c4eaa362ab507987b6, type: 3}
 --- !u!4 &781249133
 Transform:

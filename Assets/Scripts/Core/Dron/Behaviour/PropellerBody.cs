@@ -7,21 +7,21 @@ namespace Core.Drone
         [SerializeField] private float _speed = 1.0f;
         [SerializeField] private Transform _blades;
 
-        private Propeller _propeller;
+        public Propeller Propeller { get; private set; }
 
         public void Apply(Propeller propeller)
         {
-            _propeller = propeller;
+            Propeller = propeller;
         }
 
         private void FixedUpdate()
         {
-            if(_propeller == null)
+            if(Propeller == null)
             {
                 return;
             }
 
-            var velocity = Time.fixedDeltaTime * _propeller.Force.magnitude * _speed;
+            var velocity = Time.fixedDeltaTime * Propeller.Force.magnitude * _speed;
 
             _blades.localEulerAngles += Vector3.forward * velocity;
         }
