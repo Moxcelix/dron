@@ -10,5 +10,10 @@ namespace Core.Transmitter
         {
             _ether = ether;
         }
+
+        public void SendCommand(Command command)
+        {
+            _ether.SendSignal(command);
+        }
     }
 }
