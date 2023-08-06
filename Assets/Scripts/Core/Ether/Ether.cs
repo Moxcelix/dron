@@ -4,21 +4,21 @@ namespace Core.Ether
 {
     public class Ether<T> where T : ISignal
     {
-        private readonly Stack<T> _signals;
+        private readonly Dictionary<int, T> _signals;
 
         public Ether()
         {
-            _signals = new Stack<T>();
+            _signals = new Dictionary<int, T>();
         }
 
-        public T CatchSignal()
+        public T CatchSignal(int channel)
         {
-            return _signals.Pop();
+            return _signals[channel];
         }
 
-        public void SendSignal(T signal)
+        public void SendSignal(int channel, T signal)
         {
-            _signals.Push(signal);
+            _signals[channel] = signal;
         }
     }
 }

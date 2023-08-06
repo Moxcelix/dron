@@ -32,7 +32,7 @@ public class DronesManager
 
     public TransmitterController AddDrone(
         Core.Transmitter.IControls controls, 
-        float freequency,
+        int channel,
         float dronePower,
         Vector3 dronePosition)
     {
@@ -41,7 +41,7 @@ public class DronesManager
         var transmitterBody = _transmitterInstancer.Instantiate(transmitter);
         var droneBody = _droneInstancer.Instantiate(drone, dronePosition);
         var transmitterController = new TransmitterController(controls, transmitter);
-        var droneRemoteController = new DroneRemoteControl(_ether, freequency);
+        var droneRemoteController = new DroneRemoteControl(_ether, channel);
 
         _droneRemoteControllers.Add(droneRemoteController);
         _droneConnector.Connect(transmitterBody, droneBody);
