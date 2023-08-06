@@ -40,7 +40,7 @@ public class DronesManager
         var drone = _droneFabric.CreateDron(dronePower);
         var transmitterBody = _transmitterInstancer.Instantiate(transmitter);
         var droneBody = _droneInstancer.Instantiate(drone, dronePosition);
-        var transmitterController = new TransmitterController(controls, transmitter);
+        var transmitterController = new TransmitterController(controls, transmitter, channel);
         var droneRemoteController = new DroneRemoteControl(_ether, channel);
 
         _droneRemoteControllers.Add(droneRemoteController);
