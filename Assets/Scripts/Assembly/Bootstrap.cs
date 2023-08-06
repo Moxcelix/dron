@@ -33,6 +33,8 @@ public class Bootstrap : MonoBehaviour
 
         _playerController.IsAvailable = true;
 
+        _clientIO.Initialize();
+
         // Test.
         var channel = 1;
         var power = 140.0f;

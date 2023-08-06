@@ -15,23 +15,23 @@ namespace Core.SmoothInput
             this._releaseSpeed = releaseSpeed;
         }
 
-        public void Press()
+        public void Press(float deltaTime)
         {
             if (Value < 1)
             {
-                Value += _pressSpeed * Time.deltaTime;
+                Value += _pressSpeed * deltaTime;
             }
-            else if (Value > 1 + _releaseSpeed * Time.deltaTime * 2.0f)
+            else if (Value > 1 + _releaseSpeed * deltaTime * 2.0f)
             {
-                Value -= _releaseSpeed * Time.deltaTime;
+                Value -= _releaseSpeed * deltaTime;
             }
         }
 
-        public void Release()
+        public void Release(float deltaTime)
         {
             if (Value > 0)
             {
-                Value -= _releaseSpeed * Time.deltaTime;
+                Value -= _releaseSpeed * deltaTime;
             }
             else
             {

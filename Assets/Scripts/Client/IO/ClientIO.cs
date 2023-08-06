@@ -1,3 +1,4 @@
+using Core.SmoothInput;
 using System;
 using UnityEngine;
 
@@ -6,6 +7,30 @@ public class ClientIO :
     Core.Player.IControls,
     Core.Transmitter.IControls
 {
+    private class PressHelper
+    {
+        public KeyCode KeyCode { get; }
+        public SmoothPressing SmoothPressing { get; }
+
+        public PressHelper(KeyCode keyCode, SmoothPressing smoothPressing)
+        {
+            KeyCode = keyCode;
+            SmoothPressing = smoothPressing;
+        }
+
+        public void Update(float deltaTime)
+        {
+            if (Input.GetKey(KeyCode))
+            {
+                SmoothPressing.Press(deltaTime);
+            }
+            else
+            {
+                SmoothPressing.Release(deltaTime);
+            }
+        }
+    }
+
     [Header("Character controls")]
     [SerializeField] private KeyCode _forwardKey = KeyCode.W;
     [SerializeField] private KeyCode _backKey = KeyCode.S;
@@ -15,6 +40,16 @@ public class ClientIO :
     [SerializeField] private KeyCode _runKey = KeyCode.LeftControl;
     [SerializeField] private KeyCode _leaveKey = KeyCode.LeftShift;
     [SerializeField] private float _mouseSensitivity = 2;
+
+    [Header("Transmitter controls")]
+    [SerializeField] private KeyCode _rightHorizontalPositiveKey = KeyCode.L;
+    [SerializeField] private KeyCode _rightHorizontalNegativeKey = KeyCode.J;
+    [SerializeField] private KeyCode _rightVerticalPositiveKey = KeyCode.I;
+    [SerializeField] private KeyCode _rightVerticalNegativeKey = KeyCode.K;
+    [SerializeField] private KeyCode _leftHorizontalPositiveKey = KeyCode.H;
+    [SerializeField] private KeyCode _leftHorizontalNegativeKey = KeyCode.F;
+    [SerializeField] private KeyCode _leftVerticalPositiveKey = KeyCode.T;
+    [SerializeField] private KeyCode _leftVerticalNegativeKey = KeyCode.G;
 
     [Header("Other controls")]
     [SerializeField] private KeyCode _pauseKey = KeyCode.Escape;
@@ -36,9 +71,27 @@ public class ClientIO :
     public Vector2 LeftAxes { get; private set; }
     public Vector2 RightAxes { get; private set; }
 
+    private PressHelper[] _pressHelpers;
+
+    public void Initialize()
+    {
+        _pressHelpers = new PressHelper[]
+        {
+            new PressHelper(_rightHorizontalPositiveKey, new SmoothPressing(0.05f, 0.05f)),
+            new PressHelper(_rightHorizontalNegativeKey, new SmoothPressing(0.05f, 0.05f)),
+            new PressHelper(_rightVerticalPositiveKey, new SmoothPressing(0.05f, 0.05f)),
+            new PressHelper(_rightVerticalNegativeKey, new SmoothPressing(0.05f, 0.05f)),
+            new PressHelper(_leftHorizontalPositiveKey, new SmoothPressing(0.05f, 0.05f)),
+            new PressHelper(_leftHorizontalNegativeKey, new SmoothPressing(0.05f, 0.05f)),
+            new PressHelper(_leftVerticalPositiveKey, new SmoothPressing(0.05f, 0.05f)),
+            new PressHelper(_leftVerticalNegativeKey, new SmoothPressing(0.05f, 0.05f))
+        };
+    }
+
     public void Update()
     {
         HandlePlayerInput();
+        HandleTransmitterInput();
     }
 
     private void HandlePlayerInput()
@@ -53,5 +106,13 @@ public class ClientIO :
         IsRunning = Input.GetKey(_runKey);
         IsJumping = Input.GetKey(_jumpKey);
         Leave = Input.GetKeyDown(_leaveKey);
+    }
+
+    private void HandleTransmitterInput()
+    {
+        foreach(var pressHelper in _pressHelpers)
+        {
+            pressHelper.Update(Time.deltaTime);
+        }
     }
 }
