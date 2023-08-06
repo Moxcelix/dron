@@ -34,17 +34,6 @@ public class Bootstrap : MonoBehaviour
         _playerController.IsAvailable = true;
 
         // Test.
-        //var freequency = 1.0f;
-        //var transmitter = new Transmitter(_ether);
-        //var drone = _droneFabric.CreateDron(140f);
-        //var transmitterBody = _transmitterInstancer.Instantiate(transmitter);
-        //var droneBody = _droneInstancer.Instantiate(drone, new Vector3(0, 1, 0));
-        //var transmitterController = new TransmitterController(_clientIO, transmitter);
-        //var droneRemoteController = new DroneRemoteControl(_ether, freequency);
-        //drone.Power(1.0f);
-
-        //_droneConnector.Connect(transmitterBody, droneBody);
-
         var channel = 1;
         var power = 140.0f;
         var position = new Vector3(0, 1, 0);
