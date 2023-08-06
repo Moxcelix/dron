@@ -37,7 +37,6 @@ namespace Core.Drone
         private void FixedUpdate()
         {
             ApplyPropellersForce(Time.fixedDeltaTime);
-            ApplyGravityForce(Time.fixedDeltaTime);
         }
 
         private void ApplyPropellersForce(float deltaTime)
@@ -46,17 +45,7 @@ namespace Core.Drone
             {
                 _rigidbody.AddForceAtPosition(
                     _propellers[i].Propeller.Force * deltaTime,
-                    _propellers[i].gameObject.transform.localPosition);
-            }
-        }
-
-        private void ApplyGravityForce(float deltaTime)
-        {
-            for (int i = 0; i < _propellers.Length; i++)
-            {
-                _rigidbody.AddForceAtPosition(
-                    _rigidbody.mass * deltaTime * Physics.gravity,
-                    _propellers[i].gameObject.transform.localPosition);
+                    _propellers[i].gameObject.transform.position);
             }
         }
     }
