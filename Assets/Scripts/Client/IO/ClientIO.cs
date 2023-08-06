@@ -42,6 +42,7 @@ public class ClientIO :
     [SerializeField] private float _mouseSensitivity = 2;
 
     [Header("Transmitter controls")]
+    [SerializeField] private float _transmitterSpeed = 1.0f;
     [SerializeField] private KeyCode _rightHorizontalPositiveKey = KeyCode.L;
     [SerializeField] private KeyCode _rightHorizontalNegativeKey = KeyCode.J;
     [SerializeField] private KeyCode _rightVerticalPositiveKey = KeyCode.I;
@@ -77,14 +78,14 @@ public class ClientIO :
     {
         _pressHelpers = new PressHelper[]
         {
-            new PressHelper(_rightHorizontalPositiveKey, new SmoothPressing(0.05f, 0.05f)),
-            new PressHelper(_rightHorizontalNegativeKey, new SmoothPressing(0.05f, 0.05f)),
-            new PressHelper(_rightVerticalPositiveKey, new SmoothPressing(0.05f, 0.05f)),
-            new PressHelper(_rightVerticalNegativeKey, new SmoothPressing(0.05f, 0.05f)),
-            new PressHelper(_leftHorizontalPositiveKey, new SmoothPressing(0.05f, 0.05f)),
-            new PressHelper(_leftHorizontalNegativeKey, new SmoothPressing(0.05f, 0.05f)),
-            new PressHelper(_leftVerticalPositiveKey, new SmoothPressing(0.05f, 0.05f)),
-            new PressHelper(_leftVerticalNegativeKey, new SmoothPressing(0.05f, 0.05f))
+            new (_rightHorizontalPositiveKey, new (_transmitterSpeed, _transmitterSpeed)),
+            new (_rightHorizontalNegativeKey, new (_transmitterSpeed, _transmitterSpeed)),
+            new (_rightVerticalPositiveKey, new (_transmitterSpeed, _transmitterSpeed)),
+            new (_rightVerticalNegativeKey, new (_transmitterSpeed, _transmitterSpeed)),
+            new (_leftHorizontalPositiveKey, new (_transmitterSpeed, _transmitterSpeed)),
+            new (_leftHorizontalNegativeKey, new (_transmitterSpeed, _transmitterSpeed)),
+            new (_leftVerticalPositiveKey, new (_transmitterSpeed, _transmitterSpeed)),
+            new (_leftVerticalNegativeKey, new (_transmitterSpeed, _transmitterSpeed))
         };
     }
 
@@ -110,9 +111,19 @@ public class ClientIO :
 
     private void HandleTransmitterInput()
     {
-        foreach(var pressHelper in _pressHelpers)
+        foreach (var pressHelper in _pressHelpers)
         {
             pressHelper.Update(Time.deltaTime);
         }
+
+        IsActive = true;
+
+        LeftAxes = new Vector2(
+            _pressHelpers[4].SmoothPressing.Value - _pressHelpers[5].SmoothPressing.Value,
+            _pressHelpers[6].SmoothPressing.Value - _pressHelpers[7].SmoothPressing.Value);
+
+        RightAxes = new Vector2(
+            _pressHelpers[0].SmoothPressing.Value - _pressHelpers[1].SmoothPressing.Value,
+            _pressHelpers[2].SmoothPressing.Value - _pressHelpers[3].SmoothPressing.Value);
     }
 }

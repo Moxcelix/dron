@@ -13,6 +13,7 @@ public class DronesManager
     private readonly DroneConnector _droneConnector;
 
     private readonly List<DroneRemoteControl> _droneRemoteControllers;
+    private readonly List<DroneController> _droneControllers;
 
     public DronesManager(
         Ether<Command> ether,
@@ -28,10 +29,11 @@ public class DronesManager
         _droneConnector = droneConnector;
 
         _droneRemoteControllers = new List<DroneRemoteControl>();
+        _droneControllers = new List<DroneController>();
     }
 
     public TransmitterController AddDrone(
-        Core.Transmitter.IControls controls, 
+        Core.Transmitter.IControls controls,
         int channel,
         float dronePower,
         Vector3 dronePosition)
@@ -42,8 +44,10 @@ public class DronesManager
         var droneBody = _droneInstancer.Instantiate(drone, dronePosition);
         var transmitterController = new TransmitterController(controls, transmitter, channel);
         var droneRemoteController = new DroneRemoteControl(_ether, channel);
+        var droneController = new DroneController(droneRemoteController, drone);
 
         _droneRemoteControllers.Add(droneRemoteController);
+        _droneControllers.Add(droneController);
         _droneConnector.Connect(transmitterBody, droneBody);
 
         return transmitterController;
@@ -51,7 +55,12 @@ public class DronesManager
 
     public void Update()
     {
-        foreach( var controller in _droneRemoteControllers)
+        foreach (var controller in _droneRemoteControllers)
+        {
+            controller.Update();
+        }
+
+        foreach (var controller in _droneControllers)
         {
             controller.Update();
         }

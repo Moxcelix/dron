@@ -16,6 +16,7 @@ public class Bootstrap : MonoBehaviour
     private Ether<Command> _ether;
     private DroneConnector _droneConnector;
     private DronesManager _dronesManager;
+    private TransmitterController _transmitterController;
 
     private void Awake()
     {
@@ -38,15 +39,16 @@ public class Bootstrap : MonoBehaviour
         // Test.
         var channel = 1;
         var power = 140.0f;
-        var position = new Vector3(0, 1, 0);
+        var position = new Vector3(1, 1, 0);
 
-        var transmitterController = 
+        _transmitterController = 
             _dronesManager.AddDrone(_clientIO, channel, power, position);
     }
 
     private void Update()
     {
         _clientIO.Update();
+        _transmitterController.Update();
         _playerController.Update();
         _dronesManager.Update();
     }

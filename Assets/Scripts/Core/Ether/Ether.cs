@@ -1,4 +1,6 @@
+using Core.Transmitter;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Core.Ether
 {
@@ -13,12 +15,20 @@ namespace Core.Ether
 
         public T CatchSignal(int channel)
         {
+            if (!_signals.ContainsKey(channel))
+            {
+                return default;
+            }
+
             return _signals[channel];
         }
 
         public void SendSignal(int channel, T signal)
         {
             _signals[channel] = signal;
+
+            
+            Debug.Log((signal as Command).Data);
         }
     }
 }

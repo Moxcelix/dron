@@ -1,3 +1,7 @@
+using System.Collections.Generic;
+using UnityEngine;
+using Core.Utilities;
+
 namespace Core.Transmitter
 {
     public class TransmitterController
@@ -15,7 +19,15 @@ namespace Core.Transmitter
 
         public void Update()
         {
-           // if(_controls.LeftAxes
+            var data = new string[]
+            {
+                JsonUtility.ToJson(_controls.LeftAxes),
+                JsonUtility.ToJson(_controls.RightAxes),
+                JsonUtility.ToJson(_controls.IsActive)
+            };
+
+            _transmitter.SendCommand(_channel,
+                new(JsonUtility.ToJson(new ArrayWrapper<string>(data))));
         }
     }
 }
