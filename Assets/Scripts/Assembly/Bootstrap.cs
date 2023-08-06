@@ -45,7 +45,11 @@ public class Bootstrap : MonoBehaviour
 
         //_droneConnector.Connect(transmitterBody, droneBody);
 
-        var transmitter = _dronesManager.AddDrone(_clientIO, 1, 140.0f, new Vector3(0, 1, 0));
+        var channel = 1;
+        var power = 140.0f;
+        var position = new Vector3(0, 1, 0);
+
+        var transmitter = _dronesManager.AddDrone(_clientIO, channel, power, position);
     }
 
     private void Update()
