@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -4082783832072173157, guid: 50a64c52d7e07d846ab21a6095918bb4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c3d461498ae16ff46887b945fbbdacdd, type: 2}
     - target: {fileID: -3442145997776867926, guid: 50a64c52d7e07d846ab21a6095918bb4, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -246,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b96211a240f624dbfe4f5345ada5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _screen: {fileID: 923829325}
 --- !u!1 &682557385
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +562,8 @@ MonoBehaviour:
   _playerBody: {fileID: 1295742063}
   _droneInstancer:
     _dronBodyPrefab: {fileID: 7267657682009207381, guid: 55cbf1b36fa656c4eaa362ab507987b6, type: 3}
+  _transmitterInstancer:
+    _transmitterBodyPrefab: {fileID: 331652679}
 --- !u!4 &781249133
 Transform:
   m_ObjectHideFlags: 0
@@ -572,6 +579,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &923829325 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4082783832072173157, guid: 50a64c52d7e07d846ab21a6095918bb4, type: 3}
+  m_PrefabInstance: {fileID: 72046292}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

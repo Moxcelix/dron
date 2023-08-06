@@ -3,7 +3,8 @@ using UnityEngine;
 
 [Serializable]
 public class ClientIO :
-    Core.Player.IControls
+    Core.Player.IControls,
+    Core.Transmitter.IControls
 {
     [Header("Character controls")]
     [SerializeField] private KeyCode _forwardKey = KeyCode.W;

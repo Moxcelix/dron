@@ -5,12 +5,14 @@ namespace Core.Drone
     [RequireComponent(typeof(Rigidbody))]
     public class DroneBody : MonoBehaviour
     {
-
+        [SerializeField] private Camera _camera;
         [SerializeField] private PropellerBody[] _propellers;
 
         private Rigidbody _rigidbody;
 
         public Drone Drone { get; private set; }
+
+        public Camera Camera => _camera;
 
         public void Apply(Drone drone)
         {
