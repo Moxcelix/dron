@@ -11,9 +11,9 @@ namespace Core.Transmitter
             _ether = ether;
         }
 
-        public void SendCommand(Command command)
+        public void SendCommand(int channel, Command command)
         {
-            _ether.SendSignal(command);
+            _ether.SendSignal(channel, command);
         }
     }
 }

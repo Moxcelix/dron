@@ -4,9 +4,9 @@ namespace Core.Transmitter
 {
     public class Command : ISignal
     {
-        public int Data { get; }
+        public string Data { get; }
 
-        public Command(int data)
+        public Command(string data)
         {
             Data = data;
         }

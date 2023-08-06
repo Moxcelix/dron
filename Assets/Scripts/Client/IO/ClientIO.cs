@@ -31,6 +31,11 @@ public class ClientIO :
     public bool IsJumping { get; private set; }
     public bool Leave { get; private set; }
 
+    // Transmitter controls.
+    public bool IsActive { get; private set; }
+    public Vector2 LeftAxes { get; private set; }
+    public Vector2 RightAxes { get; private set; }
+
     public void Update()
     {
         HandlePlayerInput();
