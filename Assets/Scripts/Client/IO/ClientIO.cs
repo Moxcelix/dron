@@ -118,6 +118,8 @@ public class ClientIO :
 
         IsActive = true;
 
+        Debug.Log(_pressHelpers[0].SmoothPressing.Value);
+
         LeftAxes = new Vector2(
             _pressHelpers[4].SmoothPressing.Value - _pressHelpers[5].SmoothPressing.Value,
             _pressHelpers[6].SmoothPressing.Value - _pressHelpers[7].SmoothPressing.Value);

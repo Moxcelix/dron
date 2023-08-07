@@ -6,12 +6,14 @@ namespace Core.Drone
     {
         public Drone CreateDron(float power)
         {
+            var turnForce = 0.1f;
+            var maxAngle = Mathf.PI / 6.0f;
             var propellers = new Propeller[]
             {
-                new Propeller(power, Vector3.up, new Vector3(-1.0f, 0.0f, 1.0f)),
-                new Propeller(power, Vector3.up, new Vector3(-1.0f, 0.0f, -1.0f)),
-                new Propeller(power, Vector3.up, new Vector3(1.0f, 0.0f, -1.0f)),
-                new Propeller(power, Vector3.up, new Vector3(1.0f, 0.0f, 1.0f)),
+                new (power, Vector3.up, new (-turnForce, 0.0f, turnForce),maxAngle),
+                new (power, Vector3.up, new (-turnForce, 0.0f, -turnForce), maxAngle),
+                new (power, Vector3.up, new (turnForce, 0.0f, -turnForce), maxAngle),
+                new (power, Vector3.up, new (turnForce, 0.0f, turnForce), maxAngle),
             };
             var drone = new Drone(propellers);
 

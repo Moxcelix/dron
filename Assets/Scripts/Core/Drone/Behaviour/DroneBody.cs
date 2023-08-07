@@ -44,7 +44,7 @@ namespace Core.Drone
             for (int i = 0; i < _propellers.Length; i++)
             {
                 _rigidbody.AddForceAtPosition(
-                    _propellers[i].Propeller.Force * deltaTime,
+                    transform.rotation * _propellers[i].Propeller.Force * deltaTime,
                     _propellers[i].gameObject.transform.position);
             }
         }

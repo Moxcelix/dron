@@ -26,9 +26,8 @@ namespace Core.Ether
         public void SendSignal(int channel, T signal)
         {
             _signals[channel] = signal;
-
             
-            Debug.Log((signal as Command).Data);
+            //Debug.Log((signal as Command).Data);
         }
     }
 }

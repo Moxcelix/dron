@@ -21,9 +21,9 @@ namespace Core.SmoothInput
             {
                 Value += _pressSpeed * deltaTime;
             }
-            else if (Value > 1 + _releaseSpeed * deltaTime * 2.0f)
+            else 
             {
-                Value -= _releaseSpeed * deltaTime;
+                Value = 1;
             }
         }
 

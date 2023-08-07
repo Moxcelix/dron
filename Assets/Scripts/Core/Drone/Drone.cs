@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Core.Drone
 {
     public class Drone
@@ -9,19 +11,12 @@ namespace Core.Drone
             Propellers = propellers;
         }
 
-        public void Power(float range)
+        public void Power(float powerRange, float turnRange)
         {
             foreach(var propeller in Propellers)
             {
-                propeller.PowerRange = range;
-            }
-        }
-
-        public void Turn(float range)
-        {
-            foreach (var propeller in Propellers)
-            {
-                propeller.TurnRange = range;
+                propeller.PowerRange = Mathf.Clamp01(powerRange + Mathf.Abs(turnRange));
+                propeller.TurnRange = turnRange;
             }
         }
 
