@@ -11,6 +11,8 @@ namespace Core.Drone
 
         public float PowerRange { get; set; }
         public float TurnRange { get; set; }
+        public float TiltRange { get; set; }
+
         public Vector3 Force { get; private set; }
 
         public Propeller(
@@ -34,7 +36,7 @@ namespace Core.Drone
 
             Debug.Log(liftForce);
 
-            Force = PowerRange * _maxPower * (liftForce + sideForce);
+            Force = (1.0f - TiltRange) * PowerRange * _maxPower * (liftForce + sideForce);
         }
     }
 }

@@ -21,6 +21,8 @@ namespace Core.Drone
             _drone.Power(
                 powerRange: _controls.RightAxes.y,
                 turnRange : _controls.RightAxes.x);
+
+            _drone.Tilt(_controls.LeftAxes);
         }
     }
 }
