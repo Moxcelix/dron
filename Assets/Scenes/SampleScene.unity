@@ -557,6 +557,15 @@ MonoBehaviour:
     _runKey: 306
     _leaveKey: 304
     _mouseSensitivity: 5
+    _transmitterSpeed: 10
+    _rightHorizontalPositiveKey: 108
+    _rightHorizontalNegativeKey: 106
+    _rightVerticalPositiveKey: 105
+    _rightVerticalNegativeKey: 107
+    _leftHorizontalPositiveKey: 104
+    _leftHorizontalNegativeKey: 102
+    _leftVerticalPositiveKey: 116
+    _leftVerticalNegativeKey: 103
     _pauseKey: 27
     _interactKey: 101
   _playerBody: {fileID: 1295742063}

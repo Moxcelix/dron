@@ -6,6 +6,7 @@ namespace Core.Drone
     {
         private readonly float _maxPower;
         private readonly float _maxAngle;
+        private readonly float _maxTilt;
         private readonly Vector3 _liftForce;
         private readonly Vector3 _sideForce;
 
@@ -19,12 +20,14 @@ namespace Core.Drone
             float power,
             Vector3 liftPower,
             Vector3 sidePower,
-            float maxAngle)
+            float maxAngle,
+            float maxTilt)
         {
             _maxPower = power;
             _liftForce = liftPower.normalized;
             _sideForce = sidePower.normalized;
             _maxAngle = maxAngle;
+            _maxTilt = maxTilt;
         }
 
         public void Update()
@@ -36,7 +39,8 @@ namespace Core.Drone
 
             Debug.Log(liftForce);
 
-            Force = (1.0f - TiltRange) * PowerRange * _maxPower * (liftForce + sideForce);
+            Force = (1.0f - TiltRange * _maxTilt) * 
+                PowerRange * _maxPower * (liftForce + sideForce);
         }
     }
 }
