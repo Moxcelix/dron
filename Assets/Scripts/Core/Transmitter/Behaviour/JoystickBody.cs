@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Core.Transmitter
@@ -7,9 +8,18 @@ namespace Core.Transmitter
         [SerializeField] private float _maxAngle = Mathf.PI / 6.0f;
         [SerializeField] private Transform _body;
 
-        public void UpdatePosition(Vector2 axes)
+        private Joystick _joystick;
+
+        private void Update()
         {
-            _body.localEulerAngles = new (axes.y * _maxAngle, axes.x * _maxAngle);
+            _body.localEulerAngles = new (
+                _joystick.Position.y * _maxAngle,
+                _joystick.Position.x * _maxAngle);
+        }
+
+        public void Apply(Joystick joystick)
+        {
+            _joystick = joystick;
         }
     }
 }

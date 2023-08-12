@@ -8,14 +8,18 @@ namespace Core.Transmitter
         private const int screenHeigth = 640;
 
         [SerializeField] private MeshRenderer _screen;
-        [SerializeField] private JoystickBody _leftJoystick;
-        [SerializeField] private JoystickBody _rightJoystick;
+        [SerializeField] private JoystickBody[] _joystickBodies;
 
         public Transmitter Transmitter { get; private set; }
 
         public void Apply(Transmitter transmitter)
         {
             Transmitter = transmitter;
+
+            for(int i = 0; i < _joystickBodies.Length; i++)
+            {
+                _joystickBodies[i].Apply(Transmitter.Joysticks[i]);
+            }
         }
 
         public void SetTranslation(Camera camera)
