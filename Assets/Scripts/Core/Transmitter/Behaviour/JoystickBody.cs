@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Core.Transmitter
@@ -12,7 +11,7 @@ namespace Core.Transmitter
 
         private void Update()
         {
-            _body.localEulerAngles = new (
+            _body.localEulerAngles = new(
                 _joystick.Position.y * _maxAngle,
                 _joystick.Position.x * _maxAngle);
         }
