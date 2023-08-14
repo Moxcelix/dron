@@ -33,7 +33,7 @@ namespace Core.Transmitter
 
         private void Update()
         {
-            
+            Transmitter.Update();
         }
     }
 }

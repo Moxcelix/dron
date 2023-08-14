@@ -31,15 +31,8 @@ public class DroneRemoteControl : Core.Drone.IControls
 
         var command = JsonUtility.FromJson<ArrayWrapper<string>>(signal.Data).array;
 
-        if (command.Length < 3)
-        {
-            return;
-        }
-
-        Debug.Log(command.Length);
-
         LeftAxes = JsonUtility.FromJson<Vector2>(command[0]);
         RightAxes = JsonUtility.FromJson<Vector2>(command[1]);
-        IsActive = JsonUtility.FromJson<bool>(command[2]);
+        //IsActive = JsonUtility.FromJson<bool>(command[2]);
     }
 }

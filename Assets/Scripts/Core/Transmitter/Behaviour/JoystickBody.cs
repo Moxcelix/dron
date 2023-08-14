@@ -12,8 +12,8 @@ namespace Core.Transmitter
         private void Update()
         {
             _body.localEulerAngles = new(
-                _joystick.Position.y * _maxAngle,
-                _joystick.Position.x * _maxAngle);
+                - _joystick.Position.y * _maxAngle,
+                - _joystick.Position.x * _maxAngle);
         }
 
         public void Apply(Joystick joystick)

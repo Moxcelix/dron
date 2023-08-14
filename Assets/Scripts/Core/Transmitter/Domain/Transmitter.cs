@@ -12,15 +12,19 @@ namespace Core.Transmitter
 
         public Joystick[] Joysticks { get; }
 
-        public Transmitter(Ether<Command> ether, Joystick[] joysticks)
+        public Transmitter(
+            Ether<Command> ether,
+            int channel,
+            Joystick[] joysticks)
         {
             _ether = ether;
+            _channel = channel;
             Joysticks = joysticks;
         }
 
-        public void SendCommand(int channel, Command command)
+        public void SendCommand(Command command)
         {
-            _ether.SendSignal(channel, command);
+            _ether.SendSignal(_channel, command);
         }
 
         public void Update()
@@ -31,8 +35,7 @@ namespace Core.Transmitter
                 JsonUtility.ToJson(Joysticks[1].Position),
             };
 
-            SendCommand(_channel,
-                new(JsonUtility.ToJson(new ArrayWrapper<string>(data))));
+            SendCommand(new(JsonUtility.ToJson(new ArrayWrapper<string>(data))));
         }
     }
 }

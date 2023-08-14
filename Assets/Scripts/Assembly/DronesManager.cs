@@ -38,11 +38,11 @@ public class DronesManager
         float dronePower,
         Vector3 dronePosition)
     {
-        var transmitter = new Transmitter(_ether, new Joystick[] {new (), new ()});
+        var transmitter = new Transmitter(_ether, channel, new Joystick[] {new (), new ()});
         var drone = _droneFabric.CreateDron(dronePower);
         var transmitterBody = _transmitterInstancer.Instantiate(transmitter);
         var droneBody = _droneInstancer.Instantiate(drone, dronePosition);
-        var transmitterController = new TransmitterController(controls, transmitter, channel);
+        var transmitterController = new TransmitterController(controls, transmitter);
         var droneRemoteController = new DroneRemoteControl(_ether, channel);
         var droneController = new DroneController(droneRemoteController, drone);
 
