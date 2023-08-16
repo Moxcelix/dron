@@ -9,6 +9,7 @@ namespace Core.Drone
             var turnForce = 0.1f;
             var maxAngle = Mathf.PI / 6.0f;
             var maxTilt = 0.2f;
+            var battery = new Battery(1, 1);
             var propellers = new Propeller[]
             {
                 new (power, Vector3.up, new (-turnForce, 0.0f, turnForce),maxAngle, maxTilt),
@@ -16,7 +17,7 @@ namespace Core.Drone
                 new (power, Vector3.up, new (turnForce, 0.0f, -turnForce), maxAngle, maxTilt),
                 new (power, Vector3.up, new (turnForce, 0.0f, turnForce), maxAngle, maxTilt),
             };
-            var drone = new Drone(propellers);
+            var drone = new Drone(propellers, battery);
 
             return drone;
         }

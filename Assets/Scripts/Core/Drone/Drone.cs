@@ -5,10 +5,12 @@ namespace Core.Drone
     public class Drone
     {
         public Propeller[] Propellers { get; }
+        public Battery Battery { get; }
 
-        public Drone(Propeller[] propellers)
+        public Drone(Propeller[] propellers, Battery battery)
         {
             Propellers = propellers;
+            Battery = battery;
         }
 
         public void Power(float powerRange, float turnRange)
