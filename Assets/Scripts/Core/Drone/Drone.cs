@@ -24,12 +24,16 @@ namespace Core.Drone
 
         public void Tilt(Vector2 tiltRange)
         {
+            tiltRange.Normalize();
+            tiltRange = -tiltRange;
+
             for (var i = 0; i < Propellers.Length; i++)
             {
-                var angle = i * Mathf.PI * 2.0f / (float)(Propellers.Length);
-                Propellers[i].TiltRange = 
-                    tiltRange.x * Mathf.Cos(angle) +
-                    tiltRange.y * Mathf.Sin(angle);
+                var angle = (i + 0.5f) * Mathf.PI * 2.0f / (float)(Propellers.Length);
+                var propellerX = Mathf.Cos(angle);
+                var propellerY = Mathf.Sin(angle);
+
+                Propellers[i].TiltRange = 1.0f - Vector2.Distance(new(propellerX, propellerY), tiltRange);
             }
         }
 

@@ -32,25 +32,20 @@ public class DronesManager
         _droneControllers = new List<DroneController>();
     }
 
-    public TransmitterController AddDrone(
-        Core.Transmitter.IControls controls,
+    public void SpawnDrone(
+        TransmitterBody transmitterBody,
         int channel,
         float dronePower,
         Vector3 dronePosition)
     {
-        var transmitter = new Transmitter(_ether, channel, new Joystick[] {new (), new ()});
         var drone = _droneFabric.CreateDron(dronePower);
-        var transmitterBody = _transmitterInstancer.Instantiate(transmitter);
         var droneBody = _droneInstancer.Instantiate(drone, dronePosition);
-        var transmitterController = new TransmitterController(controls, transmitter);
         var droneRemoteController = new DroneRemoteControl(_ether, channel);
         var droneController = new DroneController(droneRemoteController, drone);
 
         _droneRemoteControllers.Add(droneRemoteController);
         _droneControllers.Add(droneController);
         _droneConnector.Connect(transmitterBody, droneBody);
-
-        return transmitterController;
     }
 
     public void Update()

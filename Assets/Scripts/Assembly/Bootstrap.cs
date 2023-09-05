@@ -20,9 +20,14 @@ public class Bootstrap : MonoBehaviour
 
     private void Awake()
     {
+        // Player.
+        _playerController = new PlayerController(_clientIO);
+        _playerController.SetPlayerBody(_playerBody);
+        _playerController.IsAvailable = true;
+
+        // To create drone.
         _ether = new Ether<Command>();
         _droneFabric = new DroneFabric();
-        _playerController = new PlayerController(_clientIO);
         _droneConnector = new DroneConnector();
         _dronesManager = new DronesManager(
             _ether,
@@ -30,19 +35,17 @@ public class Bootstrap : MonoBehaviour
             _droneFabric,
             _droneInstancer,
             _droneConnector);
-        _playerController.SetPlayerBody(_playerBody);
-
-        _playerController.IsAvailable = true;
-
         _clientIO.Initialize();
 
-        // Test.
         var channel = 1;
         var power = 140.0f;
         var position = new Vector3(1, 1, 0);
 
-        _transmitterController = 
-            _dronesManager.AddDrone(_clientIO, channel, power, position);
+        var transmitter = new Transmitter(_ether, channel, new Joystick[] { new(), new() });
+        var transmitterBody = _transmitterInstancer.Instantiate(transmitter);
+
+        _transmitterController = new TransmitterController(_clientIO, transmitter);
+        _dronesManager.SpawnDrone(transmitterBody, channel, power, position);
     }
 
     private void Update()

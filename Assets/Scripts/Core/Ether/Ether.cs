@@ -1,6 +1,4 @@
-using Core.Transmitter;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Core.Ether
 {
@@ -26,7 +24,7 @@ namespace Core.Ether
         public void SendSignal(int channel, T signal)
         {
             _signals[channel] = signal;
-            
+
             //Debug.Log((signal as Command).Data);
         }
     }
