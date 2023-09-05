@@ -7,6 +7,7 @@ namespace Core.Drone
         public Propeller[] Propellers { get; }
         public Battery Battery { get; }
 
+
         public Drone(Propeller[] propellers, Battery battery)
         {
             Propellers = propellers;
@@ -17,7 +18,7 @@ namespace Core.Drone
         {
             foreach (var propeller in Propellers)
             {
-                propeller.PowerRange = Mathf.Clamp01(powerRange + Mathf.Abs(turnRange));
+                propeller.PowerRange = Mathf.Clamp(powerRange + Mathf.Abs(turnRange), -1.0f, 1.0f);
                 propeller.TurnRange = turnRange;
             }
         }
