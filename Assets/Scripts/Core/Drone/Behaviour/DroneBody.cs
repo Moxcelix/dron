@@ -14,6 +14,8 @@ namespace Core.Drone
 
         public Camera Camera => _camera;
 
+        public Vector3 Velocity => _rigidbody.velocity;
+
         public void Apply(Drone drone)
         {
             Drone = drone;

@@ -37,8 +37,6 @@ namespace Core.Drone
             var liftForce = Mathf.Abs(Mathf.Sin(Mathf.Acos(range))) * _liftForce;
             var sideForce = _sideForce * range;
 
-            Debug.Log(PowerRange);
-
             Force = (1.0f - TiltRange * _maxTilt) *
                 Mathf.Clamp(PowerRange, -1.0f, 1.0f) * _maxPower * (liftForce + sideForce);
         }

@@ -17,26 +17,12 @@ namespace Core.SmoothInput
 
         public void Press(float deltaTime)
         {
-            if (Value < 1)
-            {
-                Value += _pressSpeed * deltaTime;
-            }
-            else 
-            {
-                Value = 1;
-            }
+            Value = Mathf.Lerp(Value, 1, deltaTime * _pressSpeed);
         }
 
         public void Release(float deltaTime)
         {
-            if (Value > 0)
-            {
-                Value -= _releaseSpeed * deltaTime;
-            }
-            else
-            {
-                Value = 0;
-            }
+            Value = Mathf.Lerp(Value, 0, deltaTime * _releaseSpeed);
         }
     }
 }
