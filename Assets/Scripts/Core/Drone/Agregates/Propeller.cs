@@ -40,7 +40,7 @@ namespace Core.Drone
             Debug.Log(PowerRange);
 
             Force = (1.0f - TiltRange * _maxTilt) *
-                Mathf.Clamp(PowerRange + 0.8f, -1.0f, 1.0f) * _maxPower * (liftForce + sideForce);
+                Mathf.Clamp(PowerRange, -1.0f, 1.0f) * _maxPower * (liftForce + sideForce);
         }
     }
 }

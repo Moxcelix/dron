@@ -38,7 +38,7 @@ public class Bootstrap : MonoBehaviour
         _clientIO.Initialize();
 
         var channel = 1;
-        var power = 140.0f;
+        var power = 25.0f;
         var position = new Vector3(1, 1, 0);
 
         var transmitter = new Transmitter(_ether, channel, new Joystick[] { new(), new() });
