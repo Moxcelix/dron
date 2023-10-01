@@ -4,7 +4,7 @@ namespace Core.Drone
 {
     public class DroneFabric
     {
-        public Drone CreateDron(float power)
+        public Drone CreateDrone(float power)
         {
             var turnForce = 0.05f;
             var maxAngle = Mathf.PI / 6.0f;
