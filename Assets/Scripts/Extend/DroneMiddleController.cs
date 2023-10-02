@@ -4,10 +4,12 @@ using Core.Drone;
 public class DroneMiddleController : IControls
 {
     private const float sensitivity = 0.02f;
-    private const float dropCofficient = 0.02f;
+    private const float dropCofficient = 0.01f;
     private const float liftCofficient = 1.0f;
-    private const float tiltPIDSpeed = 50.0f;
-    private const float dropResistanceCofficient = 0.5f;
+    private const float tiltPIDSpeed = 1.0f;
+    private const float dropResistanceCofficient = 0.2f;
+
+    private const float maxHeight = 100;
 
     private readonly IControls _controls;
     private readonly DroneBody _droneBody;
@@ -85,6 +87,11 @@ public class DroneMiddleController : IControls
                 _droneBody.transform.position.y +
                 RightAxes.y * liftCofficient;
 
+            if(targetHeight > maxHeight)
+            {
+                targetHeight = maxHeight;
+            }
+
             if (targetHeight > _targetHeight)
             {
                 _targetHeight = targetHeight;
@@ -100,8 +107,6 @@ public class DroneMiddleController : IControls
         var height = _droneBody.transform.position.y;
         var forceDirection = _heightController.Update(
             Time.unscaledDeltaTime, height, _targetHeight);
-
-        Debug.Log(_targetHeight);
 
         var dropSupport = 0.0f;
 

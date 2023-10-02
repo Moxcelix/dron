@@ -125,5 +125,8 @@ public class ClientIO :
         RightAxes = new Vector2(
             _pressHelpers[0].SmoothPressing.Value - _pressHelpers[1].SmoothPressing.Value,
             _pressHelpers[2].SmoothPressing.Value - _pressHelpers[3].SmoothPressing.Value);
+
+        LeftAxes = new Vector2(Input.GetAxis("LeftAxisX"), -Input.GetAxis("LeftAxisY"));
+        RightAxes = new Vector2(Input.GetAxis("RightAxisX"), -Input.GetAxis("RightAxisY"));
     }
 }

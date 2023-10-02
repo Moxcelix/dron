@@ -6,8 +6,8 @@ namespace Core.Drone
     {
         public Drone CreateDrone(float power)
         {
-            var turnForce = 0.05f;
-            var maxAngle = Mathf.PI / 6.0f;
+            var turnForce = 0.001f;
+            var maxAngle = Mathf.PI / 12.0f;
             var maxTilt = 0.05f;
             var battery = new Battery(1, 1);
             var propellers = new Propeller[]
