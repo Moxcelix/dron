@@ -52,6 +52,12 @@ public class ClientIO :
     [SerializeField] private KeyCode _leftVerticalPositiveKey = KeyCode.T;
     [SerializeField] private KeyCode _leftVerticalNegativeKey = KeyCode.G;
 
+    [Header("Transmitter controls for joystick")]
+    [SerializeField] private string _leftAxisX = "LeftAxisX";
+    [SerializeField] private string _leftAxisY = "LeftAxisY";
+    [SerializeField] private string _rightAxisX = "RightAxisX";
+    [SerializeField] private string _rightAxisY = "RightAxisY";
+
     [Header("Other controls")]
     [SerializeField] private KeyCode _pauseKey = KeyCode.Escape;
     [SerializeField] private KeyCode _interactKey = KeyCode.E;
@@ -118,15 +124,44 @@ public class ClientIO :
 
         IsActive = true;
 
-        LeftAxes = new Vector2(
-            _pressHelpers[4].SmoothPressing.Value - _pressHelpers[5].SmoothPressing.Value,
-            _pressHelpers[6].SmoothPressing.Value - _pressHelpers[7].SmoothPressing.Value);
+        Vector2 summ(Vector2 a, Vector2 b)
+        {
+            Vector2 c = a;
 
-        RightAxes = new Vector2(
-            _pressHelpers[0].SmoothPressing.Value - _pressHelpers[1].SmoothPressing.Value,
-            _pressHelpers[2].SmoothPressing.Value - _pressHelpers[3].SmoothPressing.Value);
+            if(Mathf.Abs(a.x) < Mathf.Abs(b.x))
+            {
+                c.x = b.x;
+            }
 
-        LeftAxes = new Vector2(Input.GetAxis("LeftAxisX"), -Input.GetAxis("LeftAxisY"));
-        RightAxes = new Vector2(Input.GetAxis("RightAxisX"), -Input.GetAxis("RightAxisY"));
+            if (Mathf.Abs(a.y) < Mathf.Abs(b.y))
+            {
+                c.y = b.y;
+            }
+
+            return c;
+        }
+
+        var leftAxesKeyboard = new Vector2(
+            _pressHelpers[4].SmoothPressing.Value - 
+            _pressHelpers[5].SmoothPressing.Value,
+            _pressHelpers[6].SmoothPressing.Value - 
+            _pressHelpers[7].SmoothPressing.Value);
+
+        var rightAxesKeyboard = new Vector2(
+            _pressHelpers[0].SmoothPressing.Value - 
+            _pressHelpers[1].SmoothPressing.Value,
+            _pressHelpers[2].SmoothPressing.Value - 
+            _pressHelpers[3].SmoothPressing.Value);
+
+        var leftAxesJoystick = new Vector2(
+            Input.GetAxis(_leftAxisX), 
+            Input.GetAxis(_leftAxisY));
+
+        var rightAxesJoystick = new Vector2(
+            Input.GetAxis(_rightAxisX),
+            Input.GetAxis(_rightAxisY));
+
+        RightAxes = summ(rightAxesJoystick, rightAxesKeyboard);
+        LeftAxes = summ(leftAxesJoystick, leftAxesKeyboard);
     }
 }
